@@ -1,0 +1,35 @@
+{% extends "admin_base.html" %}
+{% block title %}Orders{% endblock %}
+{% block content %}
+<h1>All Orders</h1>
+
+{% for order in orders %}
+<div class="cart-item" style="display:block;">
+    <h3>Order #{{ order.id }} — {{ order.status }}</h3>
+    <p>
+        {{ order.full_name }} | {{ order.phone }}<br>
+        {{ order.address }}<br>
+        {{ order.created_at.strftime('%d %b %Y, %I:%M %p') }}
+    </p>
+
+    {% for item in order.items %}
+        <p>{{ item.product_name }} × {{ item.quantity }}
+           = ₹{{ "%.2f"|format(item.price * item.quantity) }}</p>
+    {% endfor %}
+
+    <strong>Total: ₹{{ "%.2f"|format(order.total_amount) }}</strong>
+
+    <form action="{{ url_for('admin_update_order', order_id=order.id) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <select name="status">
+            {% for s in statuses %}
+                <option value="{{ s }}" {% if order.status == s %}selected{% endif %}>{{ s }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Update</button>
+    </form>
+</div>
+{% else %}
+<p>Abhi koi order nahi hai.</p>
+{% endfor %}
+{% endblock %}

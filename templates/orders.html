@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - AI Basket</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">🛒 AI Basket</div>
+        <div class="nav-links">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('products') }}">Products</a>
+            <a href="{{ url_for('cart') }}">Cart 🛒</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </nav>
+
+    <div class="cart-container">
+        <h1>📦 My Orders</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        {% if orders %}
+            {% for order in orders %}
+            <div class="cart-item" style="display:block;">
+                <h3>Order #{{ order.id }} — {{ order.status }}</h3>
+                <p>{{ order.created_at.strftime('%d %b %Y, %I:%M %p') }}</p>
+
+                {% for item in order.items %}
+                    <p>{{ item.product_name }} × {{ item.quantity }}
+                       = ₹{{ "%.2f"|format(item.price * item.quantity) }}</p>
+                {% endfor %}
+
+                <strong>Total: ₹{{ "%.2f"|format(order.total_amount) }}</strong>
+
+                {% if order.status in ['Pending', 'Confirmed'] %}
+                <form action="{{ url_for('cancel_order', order_id=order.id) }}" method="POST"
+                      onsubmit="return confirm('Order cancel karna hai?');">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit">❌ Order Cancel Karo</button>
+                </form>
+                {% endif %}
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>Abhi tak koi order nahi hai.</p>
+            <a href="{{ url_for('products') }}" class="checkout-btn">Shopping Shuru Karo</a>
+        {% endif %}
+    </div>
+
+</body>
+</html>

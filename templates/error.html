@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Error {{ code }} - AI Basket{% endblock %}
+
+{% block content %}
+<div class="cart-container error-page">
+    <div class="error-code">{{ code }}</div>
+    <h1>Kuch gadbad ho gayi</h1>
+    <p>{{ message }}</p>
+
+    <a href="{{ url_for('home') }}" class="checkout-btn">Home par jao</a>
+    <a href="{{ url_for('products') }}" class="checkout-btn">Products dekho</a>
+</div>
+{% endblock %}

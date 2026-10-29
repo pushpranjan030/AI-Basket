@@ -1,0 +1,36 @@
+{% if recommendations %}
+<section class="recommendations">
+
+    <h2>{{ rec_title }}</h2>
+
+    <div class="product-grid">
+        {% for product in recommendations %}
+        <div class="product-card">
+
+            <div class="product-image">
+                {% if product.image %}
+                    <img src="{{ url_for('static', filename='images/' + product.image) }}"
+                         alt="{{ product.name }}">
+                {% else %}
+                    <span>🛒</span>
+                {% endif %}
+            </div>
+
+            <div class="product-info">
+                <h2>{{ product.name }}</h2>
+                <p class="category-name">{{ product.category.name }}</p>
+                <h3>₹{{ product.price }}</h3>
+
+                <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button type="submit" class="add-cart-btn">Add to Cart 🛒</button>
+                </form>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+</section>
+{% endif %}

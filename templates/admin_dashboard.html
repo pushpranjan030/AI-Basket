@@ -1,0 +1,12 @@
+{% extends "admin_base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+<div class="stat-grid">
+    <div class="stat-card"><h2>{{ stats.products }}</h2><p>Products</p></div>
+    <div class="stat-card"><h2>{{ stats.orders }}</h2><p>Orders</p></div>
+    <div class="stat-card"><h2>{{ stats.users }}</h2><p>Users</p></div>
+    <div class="stat-card"><h2>₹{{ "%.2f"|format(stats.revenue) }}</h2><p>Revenue</p></div>
+    <div class="stat-card"><h2>{{ stats.low_stock }}</h2><p>Low stock (10 ya kam)</p></div>
+</div>
+{% endblock %}

@@ -1,0 +1,926 @@
+/* =========================================================
+   AI Basket - style.css
+   Isko static/css/style.css me paste karo (purani file replace karo)
+   ========================================================= */
+
+:root {
+    --green: #16803c;
+    --green-dark: #126b32;
+    --green-light: #e7f8e9;
+    --ink: #222;
+    --ink-soft: #666;
+    --bg: #f7f8f6;
+    --card: #ffffff;
+    --line: #e3e5e1;
+    --danger: #c62828;
+    --shadow: 0 3px 12px rgba(0, 0, 0, 0.10);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    color: var(--green);
+}
+
+h1 {
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   Buttons (general) + focus
+   ========================================================= */
+
+button {
+    font-family: inherit;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--green);
+    outline-offset: 2px;
+}
+
+/* Plain buttons jinki koi class nahi (Login, Register, Update, Remove, Delete...) */
+button:not([class]),
+.qty-controls button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background: var(--ink);
+    color: #fff;
+    transition: background 0.2s;
+}
+
+button:not([class]):hover {
+    background: #000;
+}
+
+
+/* =========================================================
+   Navbar (base.html, cart.html, checkout.html, orders.html, admin_base.html)
+   ========================================================= */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    min-height: 75px;
+    padding: 0 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    background: var(--card);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.nav-links,
+.navbar nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 22px;
+}
+
+.nav-links a,
+.navbar nav a {
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+}
+
+.nav-links a:hover,
+.navbar nav a:hover {
+    color: var(--green);
+}
+
+.nav-links span {
+    color: var(--ink-soft);
+    font-size: 14px;
+}
+
+.cart-badge {
+    background: #e53935;
+    color: #fff;
+    border-radius: 12px;
+    padding: 1px 8px;
+    font-size: 12px;
+    margin-left: 4px;
+}
+
+/* products.html me abhi <nav> bina class ke hai, usko bhi sahi dikhane ke liye */
+body > nav:not(.navbar) {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 22px;
+    padding: 22px 7%;
+    background: var(--card);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+body > nav:not(.navbar) a {
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+}
+
+body > nav:not(.navbar) a:hover {
+    color: var(--green);
+}
+
+
+/* =========================================================
+   Flash messages
+   ========================================================= */
+
+.flash-wrap {
+    max-width: 1000px;
+    margin: 10px auto;
+    padding: 0 20px;
+}
+
+p.success,
+p.error,
+p.danger,
+p.warning,
+p.info,
+p.message {
+    margin: 10px 0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border-left: 5px solid var(--ink-soft);
+    background: #eee;
+    font-size: 15px;
+}
+
+p.success { background: #e6f4ea; border-color: var(--green); color: #14532d; }
+p.error,
+p.danger  { background: #fdecea; border-color: var(--danger); color: #7f1d1d; }
+p.warning { background: #fff4e0; border-color: #ef9a00; color: #7a4b00; }
+p.info    { background: #e8f0fe; border-color: #1a73e8; color: #174ea6; }
+
+
+/* =========================================================
+   Hero (index.html)
+   ========================================================= */
+
+.hero {
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    padding: 60px 8%;
+    background: linear-gradient(120deg, var(--green-light), #ffffff);
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.small-title {
+    color: var(--green);
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-size: 58px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: var(--green);
+}
+
+.description {
+    font-size: 19px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.hero-buttons a {
+    text-decoration: none;
+}
+
+.shop-btn,
+.ai-btn {
+    border: none;
+    padding: 14px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #fff;
+    transition: background 0.2s;
+}
+
+.shop-btn {
+    background: var(--green);
+}
+
+.shop-btn:hover {
+    background: var(--green-dark);
+}
+
+.ai-btn {
+    background: var(--ink);
+}
+
+.ai-btn:hover {
+    background: #000;
+}
+
+
+/* =========================================================
+   Section titles + categories (index.html)
+   ========================================================= */
+
+.categories {
+    padding: 70px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title p {
+    color: var(--green);
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.section-title h2 {
+    font-size: 35px;
+    margin-top: 10px;
+}
+
+.category-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.category-card {
+    background: var(--card);
+    padding: 30px 20px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+.category-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.category-card h3 {
+    margin-bottom: 8px;
+}
+
+.category-card p {
+    color: var(--ink-soft);
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   Products (index.html, products.html, _recommendations.html)
+   ========================================================= */
+
+.product-section,
+.recommendations {
+    padding: 50px 8%;
+}
+
+.recommendations {
+    padding: 30px 0;
+}
+
+.product-section h1 {
+    font-size: 34px;
+}
+
+.subtitle {
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+
+.search-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.search-form input[type="text"] {
+    flex: 1;
+    min-width: 200px;
+    max-width: 380px;
+}
+
+.search-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: var(--green);
+    color: #fff;
+}
+
+.search-form button:hover {
+    background: var(--green-dark);
+}
+
+.category-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0 30px;
+}
+
+.category-filter a {
+    text-decoration: none;
+}
+
+.category-filter button {
+    padding: 8px 18px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background: var(--card);
+    color: var(--ink);
+    transition: background 0.2s, color 0.2s;
+}
+
+.category-filter button:hover {
+    border-color: var(--green);
+    color: var(--green);
+}
+
+.category-filter button.active {
+    background: #111;
+    border-color: #111;
+    color: #fff;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 22px;
+    margin: 20px 0;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--card);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+.product-image {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--green-light);
+    font-size: 60px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+
+.product-info h2 {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.product-info p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+}
+
+.product-info .category-name {
+    color: var(--green);
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.product-info h3 {
+    font-size: 20px;
+    margin: 8px 0;
+}
+
+.product-info form {
+    margin-top: auto;
+}
+
+.add-cart-btn {
+    width: 100%;
+    padding: 11px;
+    border: none;
+    border-radius: 8px;
+    background: var(--green);
+    color: #fff;
+    font-size: 15px;
+    transition: background 0.2s;
+}
+
+.add-cart-btn:hover {
+    background: var(--green-dark);
+}
+
+
+/* =========================================================
+   AI section + footer (index.html)
+   ========================================================= */
+
+.ai-section {
+    margin: 20px 8% 70px;
+    padding: 60px;
+    border-radius: 20px;
+    background: #1d1d1d;
+    color: #fff;
+}
+
+.ai-section h2 {
+    font-size: 40px;
+    max-width: 500px;
+    margin-bottom: 15px;
+}
+
+.ai-section p {
+    max-width: 600px;
+    line-height: 1.6;
+    color: #ccc;
+    margin-bottom: 25px;
+}
+
+.ai-section .small-title {
+    color: #7ee29a;
+}
+
+.ai-section .ai-btn {
+    background: var(--green);
+}
+
+.ai-section .ai-btn:hover {
+    background: var(--green-dark);
+}
+
+footer {
+    text-align: center;
+    padding: 35px;
+    background: #111;
+    color: #fff;
+}
+
+footer p {
+    margin-top: 8px;
+    color: #aaa;
+}
+
+
+/* =========================================================
+   Cart, checkout, orders, order success
+   ========================================================= */
+
+.cart-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+}
+
+.cart-item h2 {
+    margin: 0 0 8px;
+}
+
+.cart-item h3 {
+    margin-bottom: 6px;
+}
+
+.cart-item p {
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+}
+
+.cart-price {
+    font-weight: bold;
+    font-size: 20px;
+    text-align: right;
+}
+
+.cart-price form {
+    margin-top: 10px;
+}
+
+.cart-price button {
+    background: var(--danger);
+    font-size: 14px;
+}
+
+.cart-price button:hover {
+    background: #a31f1f;
+}
+
+.cart-total {
+    text-align: right;
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 12px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+}
+
+.checkout-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    margin-top: 15px;
+    margin-right: 8px;
+    text-decoration: none;
+    border-radius: 8px;
+    background: #111;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background 0.2s;
+}
+
+.checkout-btn:hover {
+    background: var(--green);
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 50px;
+}
+
+.empty-cart p {
+    color: var(--ink-soft);
+}
+
+.qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.qty-controls form {
+    margin: 0;
+}
+
+.qty-controls button {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.qty-controls strong {
+    min-width: 28px;
+    text-align: center;
+}
+
+.cart-container h3 {
+    margin: 22px 0 10px;
+}
+
+.cart-container > p {
+    margin-bottom: 6px;
+}
+
+
+/* =========================================================
+   Forms (login, register, checkout, admin product form)
+   ========================================================= */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    max-width: 420px;
+    padding: 11px 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--green);
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="file"] {
+    margin-top: 6px;
+}
+
+/* login.html aur register.html me wrapper nahi hai, isliye body ke seedhe bachon ko center kiya */
+body > h2,
+body > form,
+body > p {
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+body > h2 {
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+body > form button[type="submit"] {
+    width: 100%;
+    max-width: 380px;
+    padding: 12px;
+    background: var(--green);
+}
+
+body > form button[type="submit"]:hover {
+    background: var(--green-dark);
+}
+
+body > p {
+    margin-top: 18px;
+}
+
+
+/* =========================================================
+   Admin
+   ========================================================= */
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+}
+
+.admin-table th {
+    background: #f1f3ef;
+    font-size: 14px;
+}
+
+.admin-table tr:hover td {
+    background: #fafbf9;
+}
+
+.admin-table a {
+    margin-right: 8px;
+}
+
+.stat-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.stat-card {
+    flex: 1;
+    min-width: 160px;
+    padding: 20px;
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.stat-card h2 {
+    font-size: 30px;
+}
+
+.stat-card p {
+    color: var(--ink-soft);
+}
+
+.inline-form {
+    display: inline;
+}
+
+.inline-form button {
+    background: var(--danger);
+    padding: 5px 12px;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        position: static;
+        padding: 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links,
+    .navbar nav {
+        justify-content: center;
+        gap: 12px 16px;
+    }
+
+    .hero {
+        padding: 50px 25px;
+        min-height: 420px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .categories,
+    .product-section {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .category-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ai-section {
+        margin: 20px;
+        padding: 35px 25px;
+    }
+
+    .ai-section h2 {
+        font-size: 30px;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cart-price {
+        text-align: left;
+    }
+
+    .cart-total {
+        text-align: center;
+    }
+
+    .admin-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .category-container {
+        grid-template-columns: 1fr;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .product-image {
+        height: 130px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+
+/* =========================================================
+   Error page (error.html) + recommendations heading
+   ========================================================= */
+
+.error-page {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.error-code {
+    font-size: 90px;
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 10px;
+    color: var(--green);
+}
+
+.error-page p {
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: var(--ink-soft);
+}
+
+.recommendations > h2 {
+    font-size: 26px;
+    margin-bottom: 6px;
+}

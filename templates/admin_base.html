@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin{% endblock %} - AI Basket</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .admin-table { width: 100%; border-collapse: collapse; background: white; }
+        .admin-table th, .admin-table td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; }
+        .stat-grid { display: flex; flex-wrap: wrap; gap: 15px; }
+        .stat-card { flex: 1; min-width: 160px; padding: 20px; background: white;
+                     border-radius: 12px; box-shadow: 0 3px 12px rgba(0,0,0,0.10); }
+        .inline-form { display: inline; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">⚙️ AI Basket Admin</div>
+        <div class="nav-links">
+            <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('admin_products') }}">Products</a>
+            <a href="{{ url_for('admin_orders') }}">Orders</a>
+            <a href="{{ url_for('home') }}">Website</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </nav>
+
+    <div class="cart-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+
+_env
+.env
+venv/
+
+Lib/
+Scripts/
+Include/
+pyvenv.cfg
+__pycache__/
+*.pyc
+_env
+.env
+venv/
+ai-basket/

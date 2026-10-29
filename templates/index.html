@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}AI Basket - Smart Grocery Shopping{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-content">
+        <p class="small-title">SMART • FAST • AI POWERED</p>
+        <h1>Your Smart Grocery <span>Basket</span></h1>
+        <p class="description">
+            Buy your daily groceries easily with AI-powered recommendations.
+        </p>
+        <div class="hero-buttons">
+            <a href="{{ url_for('products') }}"><button class="shop-btn" type="button">Shop Now 🛒</button></a>
+            <button class="ai-btn" type="button" onclick="openChat()">Ask AI 🤖</button>
+        </div>
+    </div>
+</section>
+
+<section class="categories">
+    <div class="section-title">
+        <p>SHOP BY CATEGORY</p>
+        <h2>Everything You Need</h2>
+    </div>
+
+    <div class="category-container">
+        {% for c in categories %}
+        <a href="{{ url_for('products', category=c.id) }}" style="text-decoration:none; color:inherit;">
+            <div class="category-card">
+                <div class="category-icon">{{ c.icon }}</div>
+                <h3>{{ c.name }}</h3>
+                <p>{{ c.count }} Product{{ '' if c.count == 1 else 's' }}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+{% if featured %}
+<section class="product-section">
+    <div class="section-title">
+        <p>NEW ARRIVALS</p>
+        <h2>Fresh In Store</h2>
+    </div>
+
+    <div class="product-grid">
+        {% for product in featured %}
+        <div class="product-card">
+            <div class="product-image">
+                {% if product.image %}
+                    <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}">
+                {% else %}
+                    <span>🛒</span>
+                {% endif %}
+            </div>
+            <div class="product-info">
+                <h2>{{ product.name }}</h2>
+                <p class="category-name">{{ product.category.name }}</p>
+                <h3>₹{{ product.price }}</h3>
+                <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button type="submit" class="add-cart-btn">Add to Cart 🛒</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<section class="ai-section">
+    <div>
+        <p class="small-title">🤖 AI POWERED</p>
+        <h2>Your Personal Grocery Assistant</h2>
+        <p>AI Basket learns from your shopping habits and recommends products you may need.</p>
+        <button class="ai-btn" type="button" onclick="openChat()">Try AI Assistant</button>
+    </div>
+</section>
+
+<footer>
+    <h3>🛒 AI Basket</h3>
+    <p>AI-Powered Grocery E-Commerce Platform</p>
+    <p>© 2026 AI Basket. All Rights Reserved.</p>
+</footer>
+
+{% endblock %}

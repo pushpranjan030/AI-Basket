@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - AI Basket</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">🛒 AI Basket</div>
+        <div class="nav-links">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('products') }}">Products</a>
+            <a href="{{ url_for('orders') }}">My Orders</a>
+            <a href="{{ url_for('cart') }}">Cart 🛒</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </nav>
+
+    <div class="cart-container">
+        <h1>Checkout</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        <h3>Order Summary</h3>
+        {% for item in cart_items %}
+            <p>
+                {{ item.product.name }} × {{ item.quantity }}
+                = ₹{{ "%.2f"|format(item.product.price * item.quantity) }}
+            </p>
+        {% endfor %}
+        <h2>Total: ₹{{ "%.2f"|format(total) }}</h2>
+
+        <h3>Delivery Details</h3>
+       <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            <input type="text" name="full_name" placeholder="Full Name"
+                value="{{ current_user.name }}" required><br><br>
+            <input type="text" name="phone" placeholder="10 digit phone number"
+                maxlength="10" pattern="[0-9]{10}" inputmode="numeric"
+                title="10 digit ka phone number daalo" required><br><br>
+            <textarea name="address" rows="4" cols="40"
+                      placeholder="Poora address (ghar, gali, shehar, pincode)" required></textarea><br><br>
+
+            <p><strong>Payment:</strong> Cash on Delivery (COD)</p>
+
+            <button type="submit" class="checkout-btn">Place Order ✅</button>
+        </form>
+    </div>
+
+</body>
+</html>

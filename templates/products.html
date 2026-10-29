@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Basket - Products</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .category-filter button.active {
+            background: #111;
+            color: #fff;
+        }
+        .search-form {
+            margin: 15px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('products') }}">Products</a>
+
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('orders') }}">My Orders</a>
+            {% if current_user.is_admin %}
+                <a href="{{ url_for('admin_dashboard') }}">Admin</a>
+            {% endif %}
+            <span>Hi, {{ current_user.name }}</span>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+
+        <a href="{{ url_for('cart') }}">🛒 Cart</a>
+    </nav>
+
+
+    <!-- Products Section -->
+
+    <section class="product-section">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        <h1>🛍️ All Grocery Products</h1>
+
+        <p class="subtitle">
+            Fresh groceries at the best prices
+        </p>
+
+
+        <!-- Search -->
+
+        <form method="GET" action="{{ url_for('products') }}" class="search-form">
+            <input type="text" name="q" placeholder="Product search karo..."
+                   value="{{ q }}">
+            {% if selected_category %}
+                <input type="hidden" name="category" value="{{ selected_category }}">
+            {% endif %}
+            <button type="submit">Search 🔍</button>
+        </form>
+
+
+        <!-- Category Filter -->
+
+        <div class="category-filter">
+
+            <a href="{{ url_for('products', q=q or None) }}">
+                <button type="button"
+                        class="{{ 'active' if not selected_category else '' }}">
+                    All
+                </button>
+            </a>
+
+            {% for category in categories %}
+            <a href="{{ url_for('products', category=category.id, q=q or None) }}">
+                <button type="button"
+                        class="{{ 'active' if selected_category == category.id else '' }}">
+                    {{ category.name }}
+                </button>
+            </a>
+            {% endfor %}
+
+        </div>
+
+
+        <!-- AI Recommendations (sirf bina search/filter ke dikhte hain) -->
+
+        {% include "_recommendations.html" %}
+
+
+        <!-- Products -->
+
+        <div class="product-grid">
+
+            {% for product in products %}
+
+            <div class="product-card"
+                 data-category="{{ product.category_id }}">
+
+                <div class="product-image">
+
+                    {% if product.image %}
+
+                    <img src="{{ url_for('static',
+                         filename='images/' + product.image) }}"
+                         alt="{{ product.name }}">
+
+                    {% else %}
+
+                    <span>🛒</span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h2>{{ product.name }}</h2>
+
+                    <p class="category-name">
+                        {{ product.category.name }}
+                    </p>
+
+                    <p>
+                        {{ product.description }}
+                    </p>
+
+                    <h3>
+                        ₹{{ product.price }}
+                    </h3>
+
+                    <p>
+                        Stock: {{ product.stock }}
+                    </p>
+
+                    <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="POST">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="add-cart-btn">
+                            Add to Cart 🛒
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% if not products %}
+            <p>Koi product nahi mila.</p>
+        {% endif %}
+
+    </section>
+
+    {% include "_chat_widget.html" %}
+
+</body>
+</html>

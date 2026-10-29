@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Placed - AI Basket</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="cart-container" style="text-align:center;">
+        <h1>🎉 Order Place Ho Gaya!</h1>
+        <p>Order ID: <strong>#{{ order.id }}</strong></p>
+        <p>Total: <strong>₹{{ "%.2f"|format(order.total_amount) }}</strong> (COD)</p>
+        <p>Delivery address: {{ order.address }}</p>
+
+        <a href="{{ url_for('orders') }}" class="checkout-btn">My Orders</a>
+        <a href="{{ url_for('products') }}" class="checkout-btn">Aur Shopping Karo</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI Basket{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .cart-container { max-width: 1000px; margin: 40px auto; padding: 20px; }
+
+        .cart-item {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 20px; padding: 20px; margin-bottom: 15px; border-radius: 12px;
+            background: white; box-shadow: 0 3px 12px rgba(0,0,0,0.10);
+        }
+
+        .checkout-btn {
+            display: inline-block; padding: 12px 25px; margin-top: 15px;
+            text-decoration: none; border-radius: 8px; background: #111; color: white;
+            border: none; cursor: pointer;
+        }
+
+        .cart-badge {
+            background: #e53935; color: #fff; border-radius: 12px;
+            padding: 1px 8px; font-size: 12px; margin-left: 4px;
+        }
+
+        .flash-wrap { max-width: 1000px; margin: 10px auto; padding: 0 20px; }
+    </style>
+
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="{{ url_for('home') }}" style="text-decoration:none; color:inherit;">🛒 AI Basket</a>
+        </div>
+
+        <div class="nav-links">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('products') }}">Products</a>
+
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('orders') }}">My Orders</a>
+                {% if current_user.is_admin %}
+                    <a href="{{ url_for('admin_dashboard') }}">Admin</a>
+                {% endif %}
+                <span>Hi, {{ current_user.name }}</span>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+
+            <a href="{{ url_for('cart') }}">
+                🛒 Cart{% if cart_count %}<span class="cart-badge">{{ cart_count }}</span>{% endif %}
+            </a>
+        </div>
+    </nav>
+
+    <div class="flash-wrap">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+    </div>
+
+    {% block content %}{% endblock %}
+
+    {% include "_chat_widget.html" %}
+
+</body>
+</html>
