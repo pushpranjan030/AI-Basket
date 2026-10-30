@@ -31,6 +31,6 @@ class Config:
 
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = "Lax"
-    SESSION_COOKIE_SECURE = os.environ.get("SESSION_COOKIE_SECURE", "0") == "1"  # HTTPS pe 1 karo
+    SESSION_COOKIE_SECURE = os.environ.get("SESSION_COOKIE_SECURE", "0") == "1"
     WTF_CSRF_TIME_LIMIT = None
     MAX_CONTENT_LENGTH = 2 * 1024 * 1024
