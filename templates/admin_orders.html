@@ -1,6 +1,4 @@
-{% extends "admin_base.html" %}
-{% block title %}Orders{% endblock %}
-{% block content %}
+
 <h1>All Orders</h1>
 
 {% for order in orders %}
@@ -30,6 +28,6 @@
     </form>
 </div>
 {% else %}
-<p>Abhi koi order nahi hai.</p>
+<p>Order is not available.</p>
 {% endfor %}
 {% endblock %}

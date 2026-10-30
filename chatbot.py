@@ -144,8 +144,8 @@ def answer_message(message):
 
     # 1. Greeting / help
     if words & GREETINGS and not tokens:
-        return _reply("Namaste! 😊 Main AI Basket assistant hu. Budget, rate ya product ke baare me pucho. "
-                      "Jaise: '500 rupaye me hafte ka rasan'.")
+        return _reply("welcome! 😊 Main AI Basket assistant hu. Budget, rate ya product ke baare me pucho. "
+                      "Jaise: '500 me one week ka rasan'.")
     if words & HELP_WORDS:
         return _reply("Main ye kar sakta hu: budget ke hisaab se rasan batana, product ka rate aur stock batana, "
                       "sabse sasta product dhundhna, aur popular products dikhana.")

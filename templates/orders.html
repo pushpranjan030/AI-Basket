@@ -44,13 +44,13 @@
                 <form action="{{ url_for('cancel_order', order_id=order.id) }}" method="POST"
                       onsubmit="return confirm('Order cancel karna hai?');">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    <button type="submit">❌ Order Cancel Karo</button>
+                    <button type="submit">❌ Cancel My order </button>
                 </form>
                 {% endif %}
             </div>
             {% endfor %}
         {% else %}
-            <p>Abhi tak koi order nahi hai.</p>
+            <p>No Orders Yet!</p>
             <a href="{{ url_for('products') }}" class="checkout-btn">Shopping Shuru Karo</a>
         {% endif %}
     </div>

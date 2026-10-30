@@ -1,83 +1,197 @@
+
 {% extends "base.html" %}
 {% block title %}AI Basket - Smart Grocery Shopping{% endblock %}
 
 {% block content %}
 
+<!-- HERO SECTION -->
 <section class="hero">
     <div class="hero-content">
         <p class="small-title">SMART • FAST • AI POWERED</p>
-        <h1>Your Smart Grocery <span>Basket</span></h1>
+
+        <h1>
+            Your Smart Grocery
+            <span>Basket</span>
+        </h1>
+
         <p class="description">
-            Buy your daily groceries easily with AI-powered recommendations.
+            Buy your daily groceries easily with AI-powered
+            recommendations. Fresh products, smart shopping
+            and a better experience.
         </p>
+
         <div class="hero-buttons">
-            <a href="{{ url_for('products') }}"><button class="shop-btn" type="button">Shop Now 🛒</button></a>
-            <button class="ai-btn" type="button" onclick="openChat()">Ask AI 🤖</button>
+            <a href="{{ url_for('products') }}">
+                <button class="shop-btn" type="button">
+                    Shop Now 🛒
+                </button>
+            </a>
+
+            <button class="ai-btn" type="button" onclick="openChat()">
+                Ask AI 🤖
+            </button>
+        </div>
+
+        <div class="hero-features">
+            <span>✓ Fresh Products</span>
+            <span>✓ Smart Recommendations</span>
+            <span>✓ Easy Shopping</span>
+        </div>
+    </div>
+
+    <!-- HERO VISUAL -->
+    <div class="hero-visual">
+        <div class="hero-circle"></div>
+
+        <div class="hero-visual">
+            <img
+                src="{{ url_for('static', filename='images/hero-grocery.png') }}"
+                alt="AI Basket Grocery Collection"
+                class="hero-grocery-image">
+        </div>
+
+        <div class="floating-card card-one">
+            <span>🥦</span>
+            <div>
+                <strong>Fresh Vegetables</strong>
+                <small>Healthy choices</small>
+            </div>
+        </div>
+
+        <div class="floating-card card-two">
+            <span>🍎</span>
+            <div>
+                <strong>Fresh Fruits</strong>
+                <small>Daily essentials</small>
+            </div>
+        </div>
+
+        <div class="floating-card card-three">
+            <span>🤖</span>
+            <div>
+                <strong>AI Recommendations</strong>
+                <small>Smart shopping</small>
+            </div>
         </div>
     </div>
 </section>
 
+<!-- CATEGORIES SECTION -->
 <section class="categories">
     <div class="section-title">
         <p>SHOP BY CATEGORY</p>
         <h2>Everything You Need</h2>
+        <span>Explore our grocery collections</span>
     </div>
 
     <div class="category-container">
         {% for c in categories %}
-        <a href="{{ url_for('products', category=c.id) }}" style="text-decoration:none; color:inherit;">
+        <a href="{{ url_for('products', category=c.id) }}"
+           class="category-link">
+
             <div class="category-card">
                 <div class="category-icon">{{ c.icon }}</div>
                 <h3>{{ c.name }}</h3>
-                <p>{{ c.count }} Product{{ '' if c.count == 1 else 's' }}</p>
+                <p>
+                    {{ c.count }}
+                    Product{{ '' if c.count == 1 else 's' }}
+                </p>
+                <span class="category-arrow">Explore →</span>
             </div>
+
         </a>
         {% endfor %}
     </div>
 </section>
 
+<!-- FEATURED PRODUCTS -->
 {% if featured %}
 <section class="product-section">
     <div class="section-title">
         <p>NEW ARRIVALS</p>
         <h2>Fresh In Store</h2>
+        <span>Discover our latest grocery products</span>
     </div>
 
     <div class="product-grid">
         {% for product in featured %}
         <div class="product-card">
+
             <div class="product-image">
                 {% if product.image %}
-                    <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}">
+                    <img
+                        src="{{ url_for('static', filename='images/' + product.image) }}"
+                        alt="{{ product.name }}">
                 {% else %}
                     <span>🛒</span>
                 {% endif %}
             </div>
+
             <div class="product-info">
                 <h2>{{ product.name }}</h2>
-                <p class="category-name">{{ product.category.name }}</p>
+
+                <p class="category-name">
+                    {{ product.category.name }}
+                </p>
+
                 <h3>₹{{ product.price }}</h3>
-                <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="POST">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    <input type="hidden" name="next" value="{{ request.path }}">
-                    <button type="submit" class="add-cart-btn">Add to Cart 🛒</button>
+
+                <form
+                    action="{{ url_for('add_to_cart', product_id=product.id) }}"
+                    method="POST">
+
+                    <input type="hidden"
+                           name="csrf_token"
+                           value="{{ csrf_token() }}">
+
+                    <input type="hidden"
+                           name="next"
+                           value="{{ request.path }}">
+
+                    <button type="submit" class="add-cart-btn">
+                        Add to Cart 🛒
+                    </button>
                 </form>
             </div>
+
         </div>
         {% endfor %}
+    </div>
+
+    <div class="view-all">
+        <a href="{{ url_for('products') }}">
+            View All Products →
+        </a>
     </div>
 </section>
 {% endif %}
 
+<!-- AI ASSISTANT SECTION -->
 <section class="ai-section">
-    <div>
-        <p class="small-title">🤖 AI POWERED</p>
+    <div class="ai-content">
+        <p class="small-title">🤖 AI POWERED TECHNOLOGY</p>
+
         <h2>Your Personal Grocery Assistant</h2>
-        <p>AI Basket learns from your shopping habits and recommends products you may need.</p>
-        <button class="ai-btn" type="button" onclick="openChat()">Try AI Assistant</button>
+
+        <p>
+            AI Basket learns from your shopping habits
+            and recommends products you may need.
+            Make your grocery shopping smarter and easier.
+        </p>
+
+        <button class="ai-btn"
+                type="button"
+                onclick="openChat()">
+            Try AI Assistant →
+        </button>
+    </div>
+
+    <div class="ai-decoration">
+        🤖
     </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
     <h3>🛒 AI Basket</h3>
     <p>AI-Powered Grocery E-Commerce Platform</p>

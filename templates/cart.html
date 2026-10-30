@@ -142,7 +142,7 @@
                         <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="action" value="decrease">
-                            <button type="submit">−</button>
+                            <button type="submit"> </button>
                         </form>
 
                         <strong>{{ item.quantity }}</strong>

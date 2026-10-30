@@ -1,15 +1,24 @@
-
-_env
+# Environment Variables
 .env
-venv/
+.env.*
+!.env.example
 
-Lib/
-Scripts/
-Include/
-pyvenv.cfg
+# Python Cache
 __pycache__/
-*.pyc
-_env
-.env
+*.py[cod]
+
+# Virtual Environment
 venv/
-ai-basket/
+.venv/
+_env/
+
+# IDE
+.vscode/
+
+# Database Files
+*.sql
+*.db
+
+# System Files
+.DS_Store
+Thumbs.db

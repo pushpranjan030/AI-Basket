@@ -704,38 +704,6 @@ input[type="file"] {
     margin-top: 6px;
 }
 
-/* login.html aur register.html me wrapper nahi hai, isliye body ke seedhe bachon ko center kiya */
-body > h2,
-body > form,
-body > p {
-    max-width: 420px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-body > h2 {
-    margin-top: 60px;
-    margin-bottom: 20px;
-}
-
-body > form button[type="submit"] {
-    width: 100%;
-    max-width: 380px;
-    padding: 12px;
-    background: var(--green);
-}
-
-body > form button[type="submit"]:hover {
-    background: var(--green-dark);
-}
-
-body > p {
-    margin-top: 18px;
-}
-
-
 /* =========================================================
    Admin
    ========================================================= */
@@ -924,3 +892,327 @@ body > p {
     font-size: 26px;
     margin-bottom: 6px;
 }
+
+/* ==========================================
+   AI BASKET - HOMEPAGE DESIGN UPDATE
+========================================== */
+
+/* HERO SECTION */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 40px;
+    min-height: 570px;
+    padding: 70px 8%;
+    overflow: hidden;
+    background: linear-gradient(120deg, #e7f8e9, #ffffff);
+}
+
+.hero-content {
+    max-width: 650px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: clamp(40px, 5vw, 65px);
+    line-height: 1.12;
+    font-weight: 800;
+    color: #17251b;
+}
+
+.hero h1 span {
+    color: #16803c;
+}
+
+.hero .description {
+    max-width: 520px;
+    font-size: 17px;
+    color: #606b62;
+}
+
+.hero-buttons {
+    margin-bottom: 25px;
+}
+
+.hero-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    color: #24733c;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* HERO VISUAL */
+
+.hero-visual {
+    position: relative;
+    min-height: 390px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-circle {
+    position: absolute;
+    width: 330px;
+    height: 330px;
+    background: #c9efd0;
+    border-radius: 50%;
+}
+
+.grocery-emoji {
+    position: relative;
+    z-index: 1;
+    font-size: 165px;
+    filter: drop-shadow(0 15px 15px rgba(0,0,0,0.12));
+}
+
+.floating-card {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 17px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+}
+
+.floating-card > span {
+    font-size: 30px;
+}
+
+.floating-card strong,
+.floating-card small {
+    display: block;
+}
+
+.floating-card strong {
+    font-size: 13px;
+    color: #222;
+}
+
+.floating-card small {
+    color: #777;
+    font-size: 11px;
+}
+
+.card-one {
+    top: 30px;
+    left: 0;
+}
+
+.card-two {
+    right: 0;
+    top: 145px;
+}
+
+.card-three {
+    bottom: 25px;
+    left: 10px;
+}
+
+/* SECTION TITLES */
+
+.section-title > span {
+    display: block;
+    margin-top: 8px;
+    color: #777;
+}
+
+/* CATEGORY CARDS */
+
+.category-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.category-card {
+    height: 100%;
+    border: 1px solid #edf0eb;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-8px);
+    border-color: #16803c;
+    box-shadow: 0 12px 28px rgba(22,128,60,0.13);
+}
+
+.category-arrow {
+    display: inline-block;
+    margin-top: 12px;
+    color: #16803c;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* PRODUCT CARDS */
+
+.product-card {
+    border: 1px solid #edf0eb;
+    transition: all 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
+
+.product-image {
+    background: #f0f8f0;
+}
+
+.add-cart-btn {
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.add-cart-btn:hover {
+    transform: scale(1.02);
+}
+
+.view-all {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.view-all a {
+    display: inline-block;
+    padding: 12px 25px;
+    border: 1px solid #16803c;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.view-all a:hover {
+    background: #16803c;
+    color: white;
+}
+
+/* AI ASSISTANT */
+
+.ai-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    background: linear-gradient(120deg, #152b1c, #245e35);
+    overflow: hidden;
+}
+
+.ai-content {
+    position: relative;
+    z-index: 2;
+}
+
+.ai-decoration {
+    font-size: 120px;
+    opacity: 0.9;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 768px) {
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 50px 25px;
+        gap: 10px;
+    }
+
+    .hero-content {
+        text-align: center;
+    }
+
+    .hero .description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons,
+    .hero-features {
+        justify-content: center;
+    }
+
+    .hero-visual {
+        min-height: 330px;
+    }
+
+    .hero-circle {
+        width: 250px;
+        height: 250px;
+    }
+
+    .grocery-emoji {
+        font-size: 120px;
+    }
+
+    .floating-card {
+        padding: 9px 12px;
+    }
+
+    .floating-card strong {
+        font-size: 11px;
+    }
+
+    .card-one {
+        left: 0;
+    }
+
+    .card-two {
+        right: 0;
+    }
+
+    .ai-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 35px 25px;
+    }
+
+    .ai-decoration {
+        font-size: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero-visual {
+        min-height: 280px;
+    }
+
+    .floating-card {
+        gap: 6px;
+    }
+
+    .floating-card > span {
+        font-size: 23px;
+    }
+
+    .card-three {
+        left: 0;
+        bottom: 5px;
+    }
+
+    .hero-features {
+        gap: 8px;
+        font-size: 11px;
+    }
+}
+.hero-grocery-image {
+    width: 100%;
+    max-width: 480px;
+    height: 400px;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+}
+

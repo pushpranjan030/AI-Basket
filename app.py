@@ -291,7 +291,7 @@ def cart():
         cart_items=cart_items,
         total=total,
         recommendations=recommendations,
-        rec_title="🤖 Aapke cart ke saath ye bhi achha lagega"
+        rec_title="🤖 Complete Your Grocery Shopping"
     )
 
 @app.route("/cart/update/<int:item_id>", methods=["POST"])
